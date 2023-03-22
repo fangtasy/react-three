@@ -4,6 +4,8 @@ import { Tween } from "@tweenjs/tween.js";
 import Background from "../background";
 import { color } from '../config';
 import { SurroundLine } from '../effect/surroundLine';
+import { Radar } from '../effect/radar';
+import { Road } from '../effect/road';
 
 export class City {
   constructor(scene, camera) {
@@ -13,18 +15,24 @@ export class City {
 
     this.tweenPosition = null;
     this.tweenRotation = null;
+    this.height = {
+      value : 5
+    };
+    this.time = {
+      value: 0,
+    }
   }
 
   async loadCity(url) {
     const obj = await loadFBX(url);
     console.log('fbx obj ', obj);
     obj.traverse((child)=>{
-      console.log('child ', child)
+      console.log('child ', child,'this.time ', this.time)
       if (child.isMesh) {
-        new SurroundLine(this.scene, child)
+        new SurroundLine(this.scene, child, this.height, this.time)
       }
     })
-    this.scene.add(obj);
+    // this.scene.add(obj);
     // // const material = new THREE.MeshLambertMaterial({ color: '#ff0000'})
     // const mesh = new THREE.Mesh(this.child.geometry, material);
     // // let mesh inherit the position, rotation, scale form child 
@@ -36,7 +44,9 @@ export class City {
   }
 
   initEffect() {
-    new Background(this.scene, '/src/assets/sky.jpeg')
+    new Background(this.scene, '/src/assets/black-bg.png');
+    new Radar(this.scene, this.time);
+    new Road(this.scene, this.time);
 
     this.addClick();
   }
@@ -103,10 +113,16 @@ export class City {
     }
   }
 
-  start() {
+  start(delta) {
     if (this.tweenPosition && this.tweenRotation) {
       this.tweenPosition.update()
       this.tweenRotation.update()
+    }
+    this.time.value += delta;
+    // console.log('this.time v', this.time.value)
+    this.height.value += 0.5
+    if (this.height.value > 500) {
+      this.height.value = 5
     }
   }
 }

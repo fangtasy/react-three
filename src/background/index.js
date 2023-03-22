@@ -10,7 +10,7 @@ export default class Background {
   init() {
     const loader = new THREE.TextureLoader()
 
-    const geometry = new THREE.SphereGeometry(1200, 64,32);
+    const geometry = new THREE.SphereGeometry(5000, 32,32);
     const material = new THREE.MeshBasicMaterial({
       side: THREE.DoubleSide,
       map: loader.load(this.url)
