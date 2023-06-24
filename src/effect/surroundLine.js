@@ -93,7 +93,6 @@ export class SurroundLine {
     const { max, min } = this.child.geometry.boundingBox;
     console.log('max ', max, 'min ', min)
 
-    // your own material
     const material = new THREE.ShaderMaterial({
       uniforms: {
         line_color: {

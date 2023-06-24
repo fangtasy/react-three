@@ -2,7 +2,6 @@ import { loadFBX } from "./fbxLoader";
 import * as THREE from 'three'
 import { Tween } from "@tweenjs/tween.js";
 import Background from "../background";
-import { color } from '../config';
 import { SurroundLine } from '../effect/surroundLine';
 import { Radar } from '../effect/radar';
 import { Road } from '../effect/road';
