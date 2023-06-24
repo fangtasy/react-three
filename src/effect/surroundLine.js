@@ -75,6 +75,8 @@ export class SurroundLine {
       `,
     })
     // const material = new THREE.MeshLambertMaterial({ color: '#ff0000'})
+
+    // add a new comment 
     const mesh = new THREE.Mesh(this.child.geometry, material);
     // let mesh inherit the position, rotation, scale form child 
     mesh.position.copy(this.child.position);
